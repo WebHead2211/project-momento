@@ -1,0 +1,60 @@
+.comment-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 15%;
+  button {
+    position: absolute;
+    right: 0;
+    /* width: 10%; */
+    text-align: center;
+    font-weight: bold;
+    display: none;
+    padding: 5px;
+    border-radius: 12px;
+  }
+
+  button.active {
+    display: initial;
+  }
+
+  textarea::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  textarea::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  textarea::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #ff0063 0%, #ff9800 100%);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  textarea::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #ff0063 0%, #ff9800 100%);
+  }
+}
+
+textarea.new-comment {
+  resize: none;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  font-family: "Parkinsans", sans-serif;
+  font-size: 16px;
+  border: none;
+  padding: 0;
+  margin-left: 5px;
+  text-wrap: wrap;
+  padding-right: 17px;
+}
+
+textarea.new-comment:focus {
+  outline: none;
+  border: none;
+}

@@ -1,0 +1,149 @@
+#register-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: max-content;
+  margin: 100px auto;
+}
+
+input[type="file"]::file-selector-button {
+  all: unset;
+  padding: 10px 0;
+  border-radius: 12px;
+  cursor: pointer;
+  background: linear-gradient(90deg, #28a745, #20c997);
+  width: 100%;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+input[type="file"]::file-selector-button:hover {
+  box-shadow: 0 0 5px white;
+}
+
+.register-container-body {
+  border: solid 2px rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  height: max-content;
+  width: min(400px, 80vw);
+  min-width: fit-content;
+  margin: 10px 0;
+
+  span,
+  p {
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 12px;
+    transition: 0.3s ease;
+    font-weight: bold;
+  }
+
+  span:hover,
+  p:hover {
+    box-shadow: 0 0 5px white;
+  }
+
+  a {
+    all: unset;
+    cursor: pointer;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 36px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    input {
+      width: 250px;
+      height: 40px;
+      padding-left: 10px;
+      font-family: "Parkinsans", sans-serif;
+    }
+
+    input[type="file"] {
+      display: flex;
+      justify-content: center;
+      height: fit-content;
+      width: 200px;
+    }
+
+    button {
+      margin: 20px 0;
+      text-align: center;
+      padding: 10px 0;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 200px;
+    }
+
+    img {
+      width: 60vw;
+      aspect-ratio: 2 / 3;
+      object-fit: contain;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.register-container-body:nth-of-type(2) {
+  /* padding: 10px; */
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message {
+  font-weight: bold;
+  color: rgb(255, 79, 79);
+}
+
+#edit-form div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+@media only screen and (min-width: 768px) {
+  .register-container-body {
+    form {
+      img {
+        aspect-ratio: 3 / 2;
+      }
+    }
+  }
+
+  .register-container-body:nth-of-type(2) {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  header {
+    min-width: fit-content;
+    width: 20%;
+  }
+  .navlink-list {
+    li {
+      width: 100%;
+      justify-content: flex-start;
+      div:nth-of-type(2) {
+        display: initial;
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.posts-container {
+  padding-top: 50px;
+
+  .post {
+    /* height: 50vh;
+    aspect-ratio: 3 / 2;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: 100%;
+    background-position: center; */
+    height: 50vh;
+    aspect-ratio: 3 / 2;
+    margin-bottom: 100px;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    img {
+      /* height: 78%;
+      width: 84%;
+      object-fit: cover;
+      object-position: center; */
+      height: 100%;
+      z-index: 1;
+      /* border-top: 50px solid rgb(255, 239, 228);
+      border-bottom: 50px solid rgb(255, 239, 228); */
+    }
+  }
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    box-shadow: 0px 0px 5px 0px #ffffff;
+    z-index: -1;
+    /* border: 50px solid rgb(255, 239, 228); */
+  }
+
+  .bg:nth-of-type(1) {
+    transform: rotate(3deg);
+    background-color: rgb(255, 160, 160);
+  }
+  .bg:nth-of-type(2) {
+    transform: rotate(6deg);
+    background-color: rgb(171, 157, 255);
+  }
+  .bg:nth-of-type(3) {
+    transform: rotate(-3deg);
+    background-color: rgb(180, 255, 150);
+  }
+}
