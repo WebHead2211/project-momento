@@ -78,7 +78,7 @@ const registerUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      domain: "momento-frontend.vercel.app",
+      domain: ".vercel.app",
       path: "/",
     };
 
@@ -120,7 +120,7 @@ const loginUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      domain: "momento-frontend.vercel.app",
+      domain: ".vercel.app",
       path: "/",
     };
 
@@ -150,7 +150,7 @@ const logoutUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      domain: "momento-frontend.vercel.app",
+      domain: ".vercel.app",
       path: "/",
     };
 
@@ -191,7 +191,7 @@ const refreshAccessToken = async (req, res, next) => {
         httpOnly: true,
         secure: true,
         sameSite: "None",
-        domain: "momento-frontend.vercel.app",
+        domain: ".vercel.app",
       path: "/",
       };
 
@@ -244,7 +244,7 @@ const getCurrentUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      domain: "momento-frontend.vercel.app",
+      domain: ".vercel.app",
       path: "/",
     };
 
@@ -440,7 +440,7 @@ const editUser = async (req, res, next) => {
       httpOnly: true,
       secure: true,
       sameSite: "None",
-      domain: "momento-frontend.vercel.app",
+      domain: ".vercel.app",
       path: "/",
     };
 
