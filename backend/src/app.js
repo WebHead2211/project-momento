@@ -7,8 +7,8 @@ const app = express();
 app.use(
   cors({
     //origin: process.env.CORS_ORIGIN,
-     origin: 'https://momento-frontend.vercel.app',
-    credentials: true,
+    origin: 'https://momento-frontend.vercel.app',
+    // credentials: true,
   })
 );
 app.use(
