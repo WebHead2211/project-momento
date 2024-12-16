@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:8000",
+  "proxy": "https://momento-app-f7ho6.ondigitalocean.app",
   "name": "momento-frontend",
   "version": "0.1.0",
   "private": true,
