@@ -6,7 +6,8 @@ import {
   uploadOnCloudinary,
 } from "../utils/cloudinary.js";
 import jwt from "jsonwebtoken";
-import { Post } from "../models/post.model.js";
+import { Comment, Post } from "../models/post.model.js";
+import { deletePostById } from "./post.controller.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -41,14 +42,18 @@ const registerUser = async (req, res, next) => {
       throw new ApiError(409, "User with email or username already exists");
     }
 
-    const avatarLocalPath = req.files?.avatar[0]?.path;
+    let avatar;
+    const avatarLocalPath = req.files?.avatar?.[0]?.path;
     if (!avatarLocalPath) {
-      throw new ApiError(400, "Avatar file is required");
-    }
-
-    const avatar = await uploadOnCloudinary(avatarLocalPath);
-    if (!avatar) {
-      throw new ApiError(400, "Could not upload avatar on cloudinary");
+      // throw new ApiError(400, "Avatar file is required");
+      avatar = {
+        url: "https://res.cloudinary.com/aayushcloudinary/image/upload/v1734430543/default-avatar-icon-of-social-media-user-vector_zssihx.jpg",
+      };
+    } else {
+      avatar = await uploadOnCloudinary(avatarLocalPath);
+      if (!avatar) {
+        throw new ApiError(400, "Could not upload avatar on cloudinary");
+      }
     }
 
     const user = await User.create({
@@ -409,7 +414,12 @@ const editUser = async (req, res, next) => {
       if (!avatar) {
         throw new ApiError(400, "Could not upload avatar on cloudinary");
       }
-      const deletedAvatar = await deleteFromCloudinary(user.avatar);
+      if (
+        user.avatar !=
+        "https://res.cloudinary.com/aayushcloudinary/image/upload/v1734430543/default-avatar-icon-of-social-media-user-vector_zssihx.jpg"
+      ) {
+        const deletedAvatar = await deleteFromCloudinary(user.avatar);
+      }
       user.avatar = avatar.url;
     }
     await user.save();
@@ -469,6 +479,67 @@ const followSuggestions = async (req, res, next) => {
   }
 };
 
+const deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      throw new ApiError(401, "User not found");
+    }
+    if (
+      user.avatar !=
+      "https://res.cloudinary.com/aayushcloudinary/image/upload/v1734430543/default-avatar-icon-of-social-media-user-vector_zssihx.jpg"
+    ) {
+      const deletedAvatar = await deleteFromCloudinary(user.avatar);
+    }
+
+    user.posts.forEach(async (post) => {
+      await deletePostById(post._id, user);
+    });
+
+    user.likedPosts.forEach(async (post) => {
+      await Post.findByIdAndUpdate(post, {
+        $pull: { likes: user._id },
+      });
+    });
+
+    user.comments.forEach(async (item) => {
+      const comment = await Comment.findById(item);
+      await Post.findByIdAndUpdate(comment.post, {
+        $pull: { comments: comment._id },
+      });
+      await Comment.findByIdAndDelete(item);
+    });
+
+    user.following.forEach(async (item) => {
+      await User.findByIdAndUpdate(item, {
+        $pull: { followers: user._id },
+      });
+    });
+
+    user.followers.forEach(async (item) => {
+      await User.findByIdAndUpdate(item, {
+        $pull: { following: user._id },
+      });
+    });
+
+    await User.findByIdAndDelete(user._id);
+
+    const options = {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    };
+
+    return res
+      .status(200)
+      .clearCookie("accessToken", options)
+      .clearCookie("refreshToken", options)
+      .json(new ApiResponse(200, {}, "User Deleted successfully"));
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -483,6 +554,7 @@ export {
   generateAccessAndRefreshTokens,
   getUpdatedFollowers,
   editUser,
+  deleteUser,
   search,
   followSuggestions,
 };

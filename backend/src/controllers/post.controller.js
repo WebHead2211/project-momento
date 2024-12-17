@@ -208,6 +208,17 @@ const deletePost = async (req, res, next) => {
     if (!id) {
       throw new ApiError(401, "Post id required");
     }
+    const response = await deletePostById(id, user);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, response, "Post deleted successfully"));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deletePostById = async (id, user) => {
+  try {
     if (!user.posts.includes(id)) {
       throw new ApiError(401, "Unauthorized to delete this post");
     }
@@ -215,13 +226,13 @@ const deletePost = async (req, res, next) => {
     if (!post) {
       throw new ApiError(404, "Post does not exist");
     }
-  
+
     post.comments.forEach(async (item) => {
       const comment = await Comment.findById(item);
       await User.findByIdAndUpdate(comment.commenter, {
         $pull: { comments: comment._id },
       });
-      await Comment.findByIdAndDelete(comment);
+      await Comment.findByIdAndDelete(item);
     });
     post.likes.forEach(async (like) => {
       await User.findByIdAndUpdate(like, {
@@ -233,12 +244,9 @@ const deletePost = async (req, res, next) => {
     });
     await deleteFromCloudinary(post.url);
     await Post.findByIdAndDelete(post._id);
-
-    return res
-      .status(200)
-      .json(new ApiResponse(200, null, "Post deleted successfully"));
+    return null;
   } catch (error) {
-    next(error);
+    return error;
   }
 };
 
@@ -251,4 +259,5 @@ export {
   homeFeed,
   getComments,
   deletePost,
+  deletePostById
 };

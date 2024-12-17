@@ -13,6 +13,7 @@ import {
   editUser,
   search,
   followSuggestions,
+  deleteUser,
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -52,5 +53,6 @@ userRouter.route("/editUser").patch(
   ]),
   editUser
 );
+userRouter.route("/deleteUser").delete(verifyJWT, deleteUser);
 
 export default userRouter;

@@ -27,7 +27,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 // app.use(express.static("public"));
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public', 'build')));
 app.use(cookieParser());
 
 import userRouter from "./routes/user.routes.js";
@@ -38,7 +38,7 @@ import { ApiError } from "./utils/ApiError.js";
 app.use("/api/v1/posts", postRouter);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'public', 'build', 'index.html'));
 });
 
 app.use(function (err, req, res, next) {
