@@ -7,7 +7,7 @@ const app = express();
 app.use(
   cors({
     //origin: process.env.CORS_ORIGIN,
-    origin: 'https://momento-frontend.vercel.app',
+    origin: ['https://momento-frontend.vercel.app', 'https://project-momento.netlify.app'],
     credentials: true,
   })
 );
