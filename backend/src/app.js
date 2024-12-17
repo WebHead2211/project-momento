@@ -1,5 +1,6 @@
 import express from "express";
-const path = require("path");
+// const path = require("path");
+import path from "path";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
