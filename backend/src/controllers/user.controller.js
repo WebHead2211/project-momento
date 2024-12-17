@@ -77,7 +77,7 @@ const registerUser = async (req, res, next) => {
     const options = {
       httpOnly: true,
       // secure: true,
-      sameSite: "None",
+      // sameSite: "None",
     };
 
     return res
@@ -117,7 +117,7 @@ const loginUser = async (req, res, next) => {
     const options = {
       httpOnly: true,
       // secure: true,
-      sameSite: "None",
+      // sameSite: "None",
     };
 
     return res
@@ -145,7 +145,7 @@ const logoutUser = async (req, res, next) => {
     const options = {
       httpOnly: true,
       // secure: true,
-      sameSite: "None",
+      // sameSite: "None",
     };
 
     return res
@@ -184,7 +184,7 @@ const refreshAccessToken = async (req, res, next) => {
       const options = {
         httpOnly: true,
         // secure: true,
-        sameSite: "None",
+        // sameSite: "None",
       };
 
       return res
@@ -235,7 +235,7 @@ const getCurrentUser = async (req, res, next) => {
     const options = {
       httpOnly: true,
       // secure: true,
-      sameSite: "None",
+      // sameSite: "None",
     };
 
     return res
@@ -429,7 +429,7 @@ const editUser = async (req, res, next) => {
     const options = {
       httpOnly: true,
       // secure: true,
-      sameSite: "None",
+      // sameSite: "None",
     };
 
     return res
