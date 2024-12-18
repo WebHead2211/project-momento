@@ -37,9 +37,9 @@ import postRouter from "./routes/post.routes.js";
 import { ApiError } from "./utils/ApiError.js";
 app.use("/api/v1/posts", postRouter);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '..', 'public', 'build', 'index.html'));
+// });
 
 app.use(function (err, req, res, next) {
   console.log("ERROR: ", err.message);

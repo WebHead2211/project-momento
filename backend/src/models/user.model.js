@@ -77,6 +77,28 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: new Date(),
     },
+    notifications: {
+      type: [
+        {
+          user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+          },
+          type: {
+            type: String,
+            enum: ["follow", "like"],
+          },
+          post: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+          },
+          createdAt: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
+    },
   },
   { timestamps: true }
 );
