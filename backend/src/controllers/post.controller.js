@@ -109,6 +109,14 @@ const newComment = async (req, res, next) => {
     await Post.findByIdAndUpdate(post._id, {
       comments: [...post.comments, comment._id],
     });
+    const updatedUser = await User.findById(post.user._id);
+    const newNotification = {
+      user: commenter._id,
+      type: "comment",
+      post: post._id,
+    };
+    updatedUser.notifications = [...updatedUser.notifications, newNotification];
+    await updatedUser.save({ validateBeforeSave: false });
     return res
       .status(201)
       .json(new ApiResponse(200, comment, "Comment posted successfully"));
@@ -259,5 +267,5 @@ export {
   homeFeed,
   getComments,
   deletePost,
-  deletePostById
+  deletePostById,
 };

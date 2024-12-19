@@ -45,7 +45,6 @@ const registerUser = async (req, res, next) => {
     let avatar;
     const avatarLocalPath = req.files?.avatar?.[0]?.path;
     if (!avatarLocalPath) {
-      // throw new ApiError(400, "Avatar file is required");
       avatar = {
         url: "https://res.cloudinary.com/aayushcloudinary/image/upload/v1734430543/default-avatar-icon-of-social-media-user-vector_zssihx.jpg",
       };
@@ -303,12 +302,6 @@ const toggleFollow = async (req, res, next) => {
       throw new ApiError(401, "User not found");
     }
     if (user.following.includes(followUser._id)) {
-      // user.following = user.following.filter(
-      //   (id) => !id.equals(followUser._id)
-      // );
-      // followUser.followers = followUser.followers.filter(
-      //   (id) => !id.equals(user._id)
-      // );
       user = await User.findByIdAndUpdate(
         user._id,
         {
@@ -326,8 +319,6 @@ const toggleFollow = async (req, res, next) => {
       await User.findByIdAndUpdate(followUser._id, {
         $pull: { notifications: { user: user._id, type: "follow" } },
       });
-      // await user.save({ validateBeforeSave: false });
-      // await followUser.save({ validateBeforeSave: false });
       return res
         .status(200)
         .json(new ApiResponse(200, followUser, "user unfollowed successfully"));
@@ -378,10 +369,6 @@ const toggleLike = async (req, res, next) => {
       throw new ApiError(404, "Post not found");
     }
     if (user.likedPosts.includes(post._id)) {
-      // user.likedPosts = user.likedPosts.filter((id) => !id.equals(post._id));
-      // post.likes = post.likes.filter((id) => !id.equals(user._id));
-      // await user.save({ validateBeforeSave: false });
-      // await post.save({ validateBeforeSave: false });
       post = await Post.findByIdAndUpdate(
         post._id,
         {

@@ -86,7 +86,7 @@ const userSchema = new mongoose.Schema(
           },
           type: {
             type: String,
-            enum: ["follow", "like"],
+            enum: ["follow", "like", "comment"],
           },
           post: {
             type: mongoose.Schema.Types.ObjectId,

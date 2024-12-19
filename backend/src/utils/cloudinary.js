@@ -14,7 +14,6 @@ const uploadOnCloudinary = async (localFilePath) => {
       console.log("Could not find local file path.");
       return null;
     }
-    //if Local path exists then upload the file on cloudinary
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
     });
@@ -35,7 +34,6 @@ const deleteFromCloudinary = async (file) => {
       console.log("Could not find local file path.");
       return null;
     }
-    //if Local path exists then upload the file on cloudinary
     const response = await cloudinary.uploader.destroy(
       oldFileId,
       function (result) {
